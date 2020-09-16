@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Антон Трубецкой](https://up.htmlacademy.ru/javascript/21/user/832259).
-* Наставник: [Никита Победоносцев] (https://htmlacademy.ru/profile/id502263).
+* Наставник: [https://htmlacademy.ru/profile/id502263] (https://htmlacademy.ru/profile/id502263).
 
 ---
 
