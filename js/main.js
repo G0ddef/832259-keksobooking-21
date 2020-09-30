@@ -38,7 +38,7 @@ const createPhotosList = (photo) => {
 
   for (let i = 1; i < photo; i++) {
     photosList[i] = `http://o0.github.io/assets/images/tokyo/hotel` + i + `.jpg`;
-  };
+  }
 
   return photosList;
 };
@@ -93,7 +93,7 @@ const pinsFragment = (pinsData) => {
 
   for (let i = 0; i < pinsData.length; i++) {
     fragment.appendChild(pinsCreate(pinsData[i]));
-  };
+  }
 
   return fragment;
 };
