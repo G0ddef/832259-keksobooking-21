@@ -80,8 +80,6 @@ const createAds = (amount) => {
   return ads;
 };
 
-console.log(createAds(PINS));
-
 const pinCreate = (object) => {
   const pinTemplate = mapPin.cloneNode(true);
   const img = pinTemplate.querySelector('img');
