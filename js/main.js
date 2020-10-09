@@ -146,7 +146,7 @@ const directionCallback = () => {
 
 const onPinPressKey = (evt) => {
   if (evt.key === `Enter`) {
-    directionCallback();
+    directionCallback()
   }
 }
 
