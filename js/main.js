@@ -14,7 +14,6 @@ const mapPin = document.querySelector(`#pin`)
   .querySelector(`.map__pin`);
 const mapPinMain = document.querySelector(`.map__pin--main`);
 const mapFiltersElem = document.querySelector(`.map__filters`).elements;
-const mapFilters = document.querySelector(`.map__filters`);
 const adForm = document.querySelector(`.ad-form`);
 const adFormElem = document.querySelector(`.ad-form`).elements;
 const addressCoordinates = document.querySelector(`#address`);
@@ -35,8 +34,7 @@ const MainPinSize = {
   x: 65,
   y: 65,
   activeY: 87
-}
-
+};
 
 const Coordinates = {
   x: {
@@ -138,7 +136,7 @@ const directionCallback = () => {
   renderConditionForms(mapFiltersElem, false);
   renderConditionForms(adFormElem, false);
   renderPinsScreen();
-  renderConditionCoordinates(MainPinSize.x / 2, MainPinSize.activeY)
+  renderConditionCoordinates(MainPinSize.x / 2, MainPinSize.activeY);
   map.classList.remove(`map--faded`);
   adForm.classList.remove(`ad-form--disabled`);
   mapPinMain.removeEventListener(`mousedown`, onPinPressButton);
