@@ -159,14 +159,14 @@ mapPinMain.addEventListener(`keydown`, onPinPressKey);
 mapPinMain.addEventListener(`mousedown`, onPinPressButton);
 
 const getPinCoordinates = (pinCoord, pinSize) => {
-  return Math.round(parseInt(pinCoord) + (pinSize));
+  return Math.round(parseInt(pinCoord, 10) + (pinSize));
 };
 
 const renderConditionCoordinates = (xPinSize, yPinSize) => {
-  let pinCoordinatesX = getPinCoordinates(mapPinMain.style.left, MainPinSize.y / 2);
-  let pinCoordinatesY = getPinCoordinates(mapPinMain.style.top, MainPinSize.y / 2);
+  let pinCoordinatesX = getPinCoordinates(mapPinMain.style.left, xPinSize);
+  let pinCoordinatesY = getPinCoordinates(mapPinMain.style.top, yPinSize);
   addressCoordinates.value = pinCoordinatesX + `, ` + pinCoordinatesY;
-}
+};
 
 renderConditionCoordinates(MainPinSize.x / 2, MainPinSize.y / 2);
 
@@ -174,7 +174,7 @@ const renderCompatibilityRooms = () => {
   for (let i = 0; i < capacity.options.length; i++) {
     capacity.options[i].disabled = true;
   }
-  switch(quantityRooms.value){
+  switch (quantityRooms.value) {
     case `1`:
       capacity.options[2].disabled = false;
       capacity[2].selected = true;
