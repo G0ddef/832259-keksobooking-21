@@ -141,20 +141,19 @@ const directionCallback = () => {
   adForm.classList.remove(`ad-form--disabled`);
   mapPinMain.removeEventListener(`mousedown`, onPinPressButton);
   mapPinMain.removeEventListener(`keydown`, onPinPressKey);
-
-}
+};
 
 const onPinPressKey = (evt) => {
   if (evt.key === `Enter`) {
     directionCallback()
-  }
-}
+  };
+};
 
 const onPinPressButton = (evt) => {
   if (evt.button === 0) {
     directionCallback();
-  }
-}
+  };
+};
 
 mapPinMain.addEventListener(`keydown`, onPinPressKey);
 mapPinMain.addEventListener(`mousedown`, onPinPressButton);
