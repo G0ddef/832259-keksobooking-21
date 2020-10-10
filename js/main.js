@@ -145,14 +145,14 @@ const directionCallback = () => {
 
 const onPinPressKey = (evt) => {
   if (evt.key === `Enter`) {
-    directionCallback()
-  };
+    directionCallback();
+  }
 };
 
 const onPinPressButton = (evt) => {
   if (evt.button === 0) {
     directionCallback();
-  };
+  }
 };
 
 mapPinMain.addEventListener(`keydown`, onPinPressKey);
@@ -160,12 +160,12 @@ mapPinMain.addEventListener(`mousedown`, onPinPressButton);
 
 const getPinCoordinates = (pinCoord, pinSize) => {
   return Math.round(parseInt(pinCoord) + (pinSize));
-}
+};
 
 const renderConditionCoordinates = (xPinSize, yPinSize) => {
-  let pinCoordinatesX = getPinCoordinates(mapPinMain.style.left, xPinSize);
-  let pinCoordinatesY = getPinCoordinates(mapPinMain.style.top, yPinSize);
-  return addressCoordinates.value = pinCoordinatesX + `, ` + pinCoordinatesY;
+  let pinCoordinatesX = getPinCoordinates(mapPinMain.style.left, MainPinSize.y / 2);
+  let pinCoordinatesY = getPinCoordinates(mapPinMain.style.top, MainPinSize.y / 2);
+  addressCoordinates.value = pinCoordinatesX + `, ` + pinCoordinatesY;
 }
 
 renderConditionCoordinates(MainPinSize.x / 2, MainPinSize.y / 2);
@@ -174,7 +174,7 @@ const renderCompatibilityRooms = () => {
   for (let i = 0; i < capacity.options.length; i++) {
     capacity.options[i].disabled = true;
   }
-  switch(quantityRooms.value) {
+  switch(quantityRooms.value){
     case `1`:
       capacity.options[2].disabled = false;
       capacity[2].selected = true;
@@ -185,16 +185,16 @@ const renderCompatibilityRooms = () => {
       capacity[1].selected = true;
       break;
     case `3`:
-    capacity.options[0].disabled = false;
-    capacity.options[1].disabled = false;
-    capacity.options[2].disabled = false;
-    capacity[0].selected = true;
-    break;
+      capacity.options[0].disabled = false;
+      capacity.options[1].disabled = false;
+      capacity.options[2].disabled = false;
+      capacity[0].selected = true;
+      break;
     case `100`:
-    capacity.options[3].disabled = false;
-    capacity[3].selected = true;
-    break;
+      capacity.options[3].disabled = false;
+      capacity[3].selected = true;
+      break;
   }
-}
+};
 
 quantityRooms.addEventListener(`input`, renderCompatibilityRooms);
