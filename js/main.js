@@ -179,6 +179,16 @@ const renderAddressCoordinates = (xPinSize, yPinSize) => {
   addressCoordinatesNode.value = `${pinCoordinatesX}, ${pinCoordinatesY}`;
 };
 
+const defaultValiditySelectRooms = () => {
+  for (let i = 0; i < adFormNode.capacity.options.length; i++) {
+    adFormNode.capacity[i].disabled = true;
+
+    if (i === 2) {
+      adFormNode.capacity[2].disabled = false;
+    }
+  }
+};
+
 const renderCompatibilityRooms = () => {
   for (let i = 0; i < adFormNode.capacity.options.length; i++) {
     adFormNode.capacity.options[i].disabled = true;
@@ -206,6 +216,7 @@ const renderCompatibilityRooms = () => {
   }
 };
 
+defaultValiditySelectRooms();
 toggleDisabledOnFormNodes();
 mapPinMainNode.addEventListener(`keydown`, onKeyClick);
 mapPinMainNode.addEventListener(`mousedown`, onButtonClick);
