@@ -54,7 +54,7 @@ const createPhotosList = (photo) => {
   let photosList = [];
 
   for (let i = 0; i <= photo; i++) {
-    photosList[i] = `http://o0.github.io/assets/images/tokyo/hotel` + (i + 1) + `.jpg`;
+    photosList[i] = `http://o0.github.io/assets/images/tokyo/hotel${i + 1}.jpg`;
   }
 
   return photosList;
@@ -66,7 +66,7 @@ const createAds = (amount) => {
   for (let i = 1; i <= amount; i++) {
     ads.push({
       author: {
-        avatar: `img/avatars/user0` + i + `.png`
+        avatar: `img/avatars/user0${i}.png`
       },
       offer: {
         title: adTitlesArr[getRandomInt(0, adTitlesArr.length)],
@@ -81,7 +81,7 @@ const createAds = (amount) => {
         checkin: checkInTimesArr[getRandomInt(0, checkInTimesArr.length)],
         checkout: checkOutTimesArr[getRandomInt(0, checkOutTimesArr.length)],
         features: advantagesListArr.slice(getRandomInt(0, advantagesListArr.length)),
-        description: `В помещении ` + getRandomInt(0, ROOMS_AMOUNT) + ` комнат(ы).`,
+        description: `В помещении ${getRandomInt(0, ROOMS_AMOUNT)} комнат(ы).`,
         photos: createPhotosList(getRandomInt(0, QUANTITY_PHOTO))
       },
       location: {
