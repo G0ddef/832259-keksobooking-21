@@ -7,39 +7,38 @@ const MIN_HEIGHT_COORD = 130;
 const MAX_HEIGHT_COORD = 630;
 const QUANTITY_PHOTO = 3;
 
-const mapPins = document.querySelector(`.map__pins`);
-const map = document.querySelector(`.map`);
-const mapPin = document.querySelector(`#pin`)
+const mapPinsNode = document.querySelector(`.map__pins`);
+const mapNode = document.querySelector(`.map`);
+const mapPinNode = document.querySelector(`#pin`)
   .content
   .querySelector(`.map__pin`);
-const mapPinMain = document.querySelector(`.map__pin--main`);
-const mapFiltersElem = document.querySelector(`.map__filters`).elements;
-const adForm = document.querySelector(`.ad-form`);
-const adFormElem = document.querySelector(`.ad-form`).elements;
-const addressCoordinates = document.querySelector(`#address`);
-const quantityRooms = document.querySelector(`#room_number`);
-const capacity = document.querySelector(`#capacity`);
+const mapPinMainNode = document.querySelector(`.map__pin--main`);
+const mapFiltersNode = document.querySelector(`.map__filters`);
+const adFormNode = document.querySelector(`.ad-form`);
+const addressCoordinatesNode = document.querySelector(`#address`);
 
-const housingTypes = [`palace`, `flat`, `house`, `bungalow`];
-const adTitles = [`Комната`, `Квартира`, `Апартаменты`, `Номер`];
-const checkInTimes = [`12:00`, `13:00`, `14:00`];
-const checkOutTimes = [`12:00`, `13:00`, `14:00`];
-const advantagesList = [`wifi`, `dishwasher`, `parking`, `washer`];
+
+const housingTypesArr = [`palace`, `flat`, `house`, `bungalow`];
+const adTitlesArr = [`Комната`, `Квартира`, `Апартаменты`, `Номер`];
+const checkInTimesArr = [`12:00`, `13:00`, `14:00`];
+const checkOutTimesArr = [`12:00`, `13:00`, `14:00`];
+const advantagesListArr = [`wifi`, `dishwasher`, `parking`, `washer`];
+let isPageDisabled = false;
 
 const PinSize = {
   width: 50,
   height: 70
 };
 const MainPinSize = {
-  x: 65,
-  y: 65,
-  activeY: 87
+  width: 65,
+  height: 65,
+  activeHeight: 87
 };
 
 const Coordinates = {
   x: {
     min: -(PinSize.width / 2),
-    max: map.offsetWidth - (PinSize.width / 2)
+    max: mapNode.offsetWidth - (PinSize.width / 2)
   },
   y: {
     min: MIN_HEIGHT_COORD - (-PinSize.height),
@@ -70,18 +69,18 @@ const createAds = (amount) => {
         avatar: `img/avatars/user0` + i + `.png`
       },
       offer: {
-        title: adTitles[getRandomInt(0, adTitles.length)],
+        title: adTitlesArr[getRandomInt(0, adTitlesArr.length)],
         adress: {
           x: getRandomInt(Coordinates.x.min, Coordinates.x.max),
           y: getRandomInt(Coordinates.y.min, Coordinates.y.max)
         },
         price: getRandomInt(0, i * 500),
-        type: housingTypes[getRandomInt(0, housingTypes.length)],
+        type: housingTypesArr[getRandomInt(0, housingTypesArr.length)],
         rooms: getRandomInt(1, ROOMS_AMOUNT),
         guests: getRandomInt(1, GUESTS_AMOUNT),
-        checkin: checkInTimes[getRandomInt(0, checkInTimes.length)],
-        checkout: checkOutTimes[getRandomInt(0, checkOutTimes.length)],
-        features: advantagesList.slice(getRandomInt(0, advantagesList.length)),
+        checkin: checkInTimesArr[getRandomInt(0, checkInTimesArr.length)],
+        checkout: checkOutTimesArr[getRandomInt(0, checkOutTimesArr.length)],
+        features: advantagesListArr.slice(getRandomInt(0, advantagesListArr.length)),
         description: `В помещении ` + getRandomInt(0, ROOMS_AMOUNT) + ` комнат(ы).`,
         photos: createPhotosList(getRandomInt(0, QUANTITY_PHOTO))
       },
@@ -96,7 +95,7 @@ const createAds = (amount) => {
 };
 
 const pinCreate = (object) => {
-  const pinTemplate = mapPin.cloneNode(true);
+  const pinTemplate = mapPinNode.cloneNode(true);
   const img = pinTemplate.querySelector(`img`);
   pinTemplate.style.left = `${object.location.x}px`;
   pinTemplate.style.top = `${object.location.y}px`;
@@ -120,81 +119,95 @@ const renderPinsScreen = () => {
   const pinsDataArr = createAds(PINS_AMOUNT);
   const getPinsFragmentNodes = getPinsFragment(pinsDataArr);
 
-  mapPins.appendChild(getPinsFragmentNodes);
+  mapPinsNode.appendChild(getPinsFragmentNodes);
 };
 
-const renderConditionForms = (formName, condition) => {
-  for (let i = 0; i < formName.length; i++) {
-    formName[i].disabled = condition;
+const toggleDisabledOnFormNodes = () => {
+  isPageDisabled = !isPageDisabled;
+
+  for (let i = 0; i < mapFiltersNode.elements.length; i++) {
+    mapFiltersNode.elements[i].disabled = isPageDisabled;
+    mapFiltersNode.elements[i].classList.add('blocked-form');
+  }
+
+  for (let i = 0; i < adFormNode.elements.length; i++) {
+    adFormNode.elements[i].disabled = isPageDisabled;
+    adFormNode.elements[i].classList.add('blocked-form');
   }
 };
 
-renderConditionForms(mapFiltersElem, true);
-renderConditionForms(adFormElem, true);
+const toggleEnabledHover = () => {
+  for (let i = 0; i < adFormNode.elements.length; i++) {
+    adFormNode.elements[i].classList.remove('blocked-form');
+  }
 
-const directionCallback = () => {
-  renderConditionForms(mapFiltersElem, false);
-  renderConditionForms(adFormElem, false);
+  for (let i = 0; i < mapFiltersNode.elements.length; i++) {
+    mapFiltersNode.elements[i].classList.remove('blocked-form');
+  }
+};
+
+const toggleEnabledOnFormNodes = () => {
   renderPinsScreen();
-  renderConditionCoordinates(MainPinSize.x / 2, MainPinSize.activeY);
-  map.classList.remove(`map--faded`);
-  adForm.classList.remove(`ad-form--disabled`);
-  mapPinMain.removeEventListener(`mousedown`, onPinPressButton);
-  mapPinMain.removeEventListener(`keydown`, onPinPressKey);
+  toggleDisabledOnFormNodes();
+  toggleEnabledHover();
+  renderAddressCoordinates(MainPinSize.width / 2, MainPinSize.activeHeight);
+  mapNode.classList.remove(`map--faded`);
+  adFormNode.classList.remove(`ad-form--disabled`);
+  mapPinMainNode.removeEventListener(`mousedown`, onButtonClick);
+  mapPinMainNode.removeEventListener(`keydown`, onKeyClick);
 };
 
-const onPinPressKey = (evt) => {
+const onKeyClick = (evt) => {
   if (evt.key === `Enter`) {
-    directionCallback();
+    toggleEnabledOnFormNodes();
   }
 };
 
-const onPinPressButton = (evt) => {
+const onButtonClick = (evt) => {
   if (evt.button === 0) {
-    directionCallback();
+    toggleEnabledOnFormNodes();
   }
 };
-
-mapPinMain.addEventListener(`keydown`, onPinPressKey);
-mapPinMain.addEventListener(`mousedown`, onPinPressButton);
 
 const getPinCoordinates = (pinCoord, pinSize) => {
   return Math.round(parseInt(pinCoord, 10) + (pinSize));
 };
 
-const renderConditionCoordinates = (xPinSize, yPinSize) => {
-  let pinCoordinatesX = getPinCoordinates(mapPinMain.style.left, xPinSize);
-  let pinCoordinatesY = getPinCoordinates(mapPinMain.style.top, yPinSize);
-  addressCoordinates.value = pinCoordinatesX + `, ` + pinCoordinatesY;
+const renderAddressCoordinates = (xPinSize, yPinSize) => {
+  let pinCoordinatesX = getPinCoordinates(mapPinMainNode.style.left, xPinSize);
+  let pinCoordinatesY = getPinCoordinates(mapPinMainNode.style.top, yPinSize);
+  addressCoordinatesNode.value = `${pinCoordinatesX}, ${pinCoordinatesY}`;
 };
-
-renderConditionCoordinates(MainPinSize.x / 2, MainPinSize.y / 2);
 
 const renderCompatibilityRooms = () => {
-  for (let i = 0; i < capacity.options.length; i++) {
-    capacity.options[i].disabled = true;
+  for (let i = 0; i < adFormNode.capacity.options.length; i++) {
+    adFormNode.capacity.options[i].disabled = true;
   }
-  switch (quantityRooms.value) {
+  switch (adFormNode.rooms.value) {
     case `1`:
-      capacity.options[2].disabled = false;
-      capacity[2].selected = true;
+      adFormNode.capacity.options[2].disabled = false;
+      adFormNode.capacity[2].selected = true;
       break;
     case `2`:
-      capacity.options[1].disabled = false;
-      capacity.options[2].disabled = false;
-      capacity[1].selected = true;
+      adFormNode.capacity.options[1].disabled = false;
+      adFormNode.capacity.options[2].disabled = false;
+      adFormNode.capacity[1].selected = true;
       break;
     case `3`:
-      capacity.options[0].disabled = false;
-      capacity.options[1].disabled = false;
-      capacity.options[2].disabled = false;
-      capacity[0].selected = true;
+      adFormNode.capacity.options[0].disabled = false;
+      adFormNode.capacity.options[1].disabled = false;
+      adFormNode.capacity.options[2].disabled = false;
+      adFormNode.capacity[0].selected = true;
       break;
     case `100`:
-      capacity.options[3].disabled = false;
-      capacity[3].selected = true;
+      adFormNode.capacity.options[3].disabled = false;
+      adFormNode.capacity[3].selected = true;
       break;
   }
 };
 
-quantityRooms.addEventListener(`input`, renderCompatibilityRooms);
+toggleDisabledOnFormNodes();
+mapPinMainNode.addEventListener(`keydown`, onKeyClick);
+mapPinMainNode.addEventListener(`mousedown`, onButtonClick);
+renderAddressCoordinates(MainPinSize.width / 2, MainPinSize.height / 2);
+adFormNode.rooms.addEventListener(`input`, renderCompatibilityRooms);
