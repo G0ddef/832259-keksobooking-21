@@ -1246,3 +1246,7 @@ fieldset {
 .hidden {
   display: none;
 }
+
+.blocked-form {
+  pointer-events: none;
+}
