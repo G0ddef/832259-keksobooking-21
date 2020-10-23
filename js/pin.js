@@ -1,11 +1,8 @@
 'use strict';
 
 (() => {
-  const mapPinsNode = document.querySelector(`.map__pins`);
   const mapNode = document.querySelector(`.map`);
-  const mapPinNode = document.querySelector(`#pin`)
-    .content
-    .querySelector(`.map__pin`);
+  const mapPinNode = document.querySelector(`#pin`).content.querySelector(`.map__pin`);
   const mapMainNode = document.querySelector(`.map__pin--main`);
 
   const pinCreate = (object) => {
@@ -19,7 +16,7 @@
     return pinTemplate;
   };
 
-  const getPinsFragment = (pinsData) => {
+  const getFragment = (pinsData) => {
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < pinsData.length; i++) {
@@ -29,16 +26,9 @@
     return fragment;
   };
 
-  const renderScreen = () => {
-    const pinsDataArr = window.data.createAds(window.data.PINS_AMOUNT);
-    const getPinsFragmentNodes = getPinsFragment(pinsDataArr);
-
-    mapPinsNode.appendChild(getPinsFragmentNodes);
-  };
-
   window.pin = {
-    mapNode,
     mapMainNode,
-    renderScreen
+    mapNode,
+    getFragment
   };
 })();

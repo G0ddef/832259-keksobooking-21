@@ -1,31 +1,32 @@
 'use strict';
 
 (() => {
+  const mapNode = document.querySelector(`.map`);
   let isPageDisabled = false;
 
   const toggleDisabledOnFormNodes = () => {
     isPageDisabled = !isPageDisabled;
-    let toggleHover = isPageDisabled ? `add` : `remove`;
+    let hover = isPageDisabled ? `add` : `remove`;
     for (let i = 0; i < window.form.mapFiltersNode.elements.length; i++) {
       window.form.mapFiltersNode.elements[i].disabled = isPageDisabled;
-      window.form.mapFiltersNode.elements[i].classList[toggleHover](`blocked-form`);
+      window.form.mapFiltersNode.elements[i].classList[hover](`blocked-form`);
     }
 
-    for (let i = 0; i < window.form.adFormNode.elements.length; i++) {
-      window.form.adFormNode.elements[i].disabled = isPageDisabled;
-      window.form.adFormNode.elements[i].classList[toggleHover](`blocked-form`);
+    for (let i = 0; i < window.form.adNode.elements.length; i++) {
+      window.form.adNode.elements[i].disabled = isPageDisabled;
+      window.form.adNode.elements[i].classList[hover](`blocked-form`);
     }
   };
 
   const activatePage = () => {
-    window.pin.renderScreen();
     toggleDisabledOnFormNodes();
+    window.load(window.data.ads, window.data.errorHandler);
     window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
     window.pin.mapNode.classList.remove(`map--faded`);
-    window.form.adFormNode.classList.remove(`ad-form--disabled`);
+    window.form.adNode.classList.remove(`ad-form--disabled`);
     window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
-    window.form.adFormNode.rooms.addEventListener(`input`, window.form.validateRoomsInput);
+    window.form.adNode.rooms.addEventListener(`input`, window.form.validateRoomsInput);
   };
 
   const onKeyClick = (evt) => {
@@ -36,7 +37,8 @@
     window.util.isButtonEvent(evt, activatePage);
   };
 
-  window.toggleDisabledPage = {
+  window.statusPage = {
+    mapNode,
     toggleDisabledOnFormNodes,
     onKeyClick,
     onButtonClick
