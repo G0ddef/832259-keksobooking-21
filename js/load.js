@@ -11,7 +11,7 @@
     onSuccesLoad: (onSucces) => {
       const xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
-  
+
       xhr.addEventListener('load', () => {
         if (xhr.status === StatusCode.OK) {
           onSucces(xhr.response);
@@ -20,10 +20,10 @@
           window.data.errorArea.classList.remove(`error-handler`);
           window.data.errorArea.textContent = ``;
         } else {
-          onError(`Response status: ${xhr.status} ${xhr.statusText}`);
+          window.data.onError(`Response status: ${xhr.status} ${xhr.statusText}`);
         }
       });
-  
+
       xhr.open('GET', URL);
       xhr.send();
     },
@@ -31,18 +31,18 @@
     onErrorLoad: (onError) => {
       const xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
-      
+
       xhr.addEventListener(`error`, () => {
         onError(`Error connection`);
       });
       xhr.addEventListener('timeout', () => {
         onError(`Запрос не успел выполниться за ${xhr.timeout / 1000} сек. Статус ответа: ${xhr.status} ${xhr.statusText}. Попробуйте перезагрузить страницу!`);
       });
-      
+
       xhr.timeout = TIMEOUT_IN_MS;
-      
+
       xhr.open('GET', URL);
       xhr.send();
     }
-  }
+  };
 })();
