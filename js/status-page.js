@@ -20,10 +20,8 @@
 
   const activatePage = () => {
     toggleDisabledOnFormNodes();
-    window.load(window.data.ads, window.data.errorHandler);
+    window.load.onSuccesLoad(window.data.ads);
     window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
-    window.pin.mapNode.classList.remove(`map--faded`);
-    window.form.adNode.classList.remove(`ad-form--disabled`);
     window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     window.form.adNode.rooms.addEventListener(`input`, window.form.validateRoomsInput);

@@ -10,18 +10,15 @@
 
   const errorHandler = (errorMessage) => {
     const errorArea = document.createElement('div');
-    errorArea.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    errorArea.style.position = 'absolute';
-    errorArea.style.left = 0;
-    errorArea.style.right = 0;
-    errorArea.style.fontSize = '30px';
+    window.data.errorArea = errorArea;
+    window.data.errorArea.classList.add('error-handler');
 
-    errorArea.textContent = errorMessage;
+    window.data.errorArea.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', errorArea);
   };
 
   window.data = {
     ads,
-    errorHandler
+    errorHandler,
   };
 })();
