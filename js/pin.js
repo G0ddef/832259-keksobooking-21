@@ -25,7 +25,7 @@
 
     return fragment;
   };
-
+  
   window.pin = {
     mapMainNode,
     mapNode,
