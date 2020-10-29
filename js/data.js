@@ -19,6 +19,6 @@
 
   window.data = {
     ads,
-    errorHandler,
+    errorHandler
   };
 })();
