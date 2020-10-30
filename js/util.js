@@ -35,12 +35,12 @@
     getRandomInt,
     createPhotosList,
     renderAddressCoordinates,
-    isKeyEvent: (evt, action) => {
+    onEnterKeyPress: (evt, action) => {
       if (evt.key === `Enter`) {
         action();
       }
     },
-    isButtonEvent: (evt, action) => {
+    onMainMouseButtonClick: (evt, action) => {
       if (evt.button === 0) {
         action();
       }

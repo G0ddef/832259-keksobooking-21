@@ -18,9 +18,11 @@
     }
   };
 
-  const activatePage = () => {
+  const activatePage = (data) => {
     toggleDisabledOnFormNodes();
-    window.load(window.data.ads, window.data.errorHandler);
+    window.data.createAds(data);
+    window.pin.mapNode.classList.remove(`map--faded`);
+    window.form.adNode.classList.remove(`ad-form--disabled`);
     window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
     window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
@@ -28,11 +30,17 @@
   };
 
   const onKeyClick = (evt) => {
-    window.util.isKeyEvent(evt, activatePage);
+    window.util.onEnterKeyPress(evt, () => {
+      window.load(activatePage, window.data.errorHandler);
+      window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
+    });
   };
 
   const onButtonClick = (evt) => {
-    window.util.isButtonEvent(evt, activatePage);
+    window.util.onMainMouseButtonClick(evt, () => {
+      window.load(activatePage, window.data.errorHandler);
+      window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
+    });
   };
 
   window.statusPage = {
