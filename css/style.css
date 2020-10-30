@@ -1250,3 +1250,17 @@ fieldset {
 .blocked-form {
   pointer-events: none;
 }
+
+.error-handler {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  margin: 0 auto;
+
+  font-size: 20px;
+  text-align: center;
+
+  background-color: red;
+}
