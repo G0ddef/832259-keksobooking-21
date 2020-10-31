@@ -32,6 +32,7 @@
   const onKeyClick = (evt) => {
     window.util.onEnterKeyPress(evt, () => {
       window.load(activatePage, window.data.errorHandler);
+      window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
       window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     });
   };
@@ -40,6 +41,7 @@
     window.util.onMainMouseButtonClick(evt, () => {
       window.load(activatePage, window.data.errorHandler);
       window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
+      window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     });
   };
 
