@@ -36,6 +36,8 @@
     const cardTime = cardTemplate.querySelector(`.popup__text--time`);
     const cardDescription = cardTemplate.querySelector(`.popup__description`);
     const cardFeatures = cardTemplate.querySelector(`.popup__features`);
+    const cardFeaturesList = cardFeatures.querySelector(`.popup__feature`);
+    cardFeaturesList.classList.add(`popup__feature--${object.offer.features[0]}`);
     const cardPhotos = cardTemplate.querySelector(`.popup__photos`);
     const imgList = cardPhotos.querySelector(`img`);
     cardAvatar.src = object.author.avatar;
@@ -45,8 +47,13 @@
     cardCapacity.textContent = `${object.offer.rooms} комнаты для ${object.offer.guests} гостей`;
     cardTime.textContent = `Заезд после ${object.offer.checkin}, выезд до ${object.offer.checkout}`;
     cardDescription.textContent = object.offer.description;
-    cardFeatures.querySelector(`.popup__feature`).textContent = object.offer.features;
     imgList.src = object.offer.photos[0];
+
+    for (let i = 1; i < object.offer.features.length; i++) {
+      const newFeature = cardFeaturesList.cloneNode(true);
+      newFeature.classList.add(`popup__feature--${object.offer.features[i]}`);
+      cardFeatures.appendChild(newFeature);
+    }
 
     for (let i = 1; i < object.offer.photos.length; i++) {
       const newPhoto = imgList.cloneNode(true);
