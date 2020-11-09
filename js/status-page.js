@@ -27,11 +27,16 @@
     window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     window.form.adNode.rooms.addEventListener(`input`, window.form.validateRoomsInput);
+    window.form.adNode.title.addEventListener(`input`, window.form.validateTitleInput);
+    window.form.adNode.type.addEventListener(`input`, window.form.validateTypeInput);
+    window.form.adNode.timein.addEventListener(`input`, window.form.validateTimeInput);
+    window.form.validateAddressInput();
   };
 
   const onKeyClick = (evt) => {
     window.util.onEnterKeyPress(evt, () => {
       window.load(activatePage, window.data.errorHandler);
+      window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
       window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     });
   };
@@ -40,6 +45,7 @@
     window.util.onMainMouseButtonClick(evt, () => {
       window.load(activatePage, window.data.errorHandler);
       window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
+      window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     });
   };
 
