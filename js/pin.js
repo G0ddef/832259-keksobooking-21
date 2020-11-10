@@ -17,13 +17,13 @@
 
     const onButtonClick = (evt) => {
       window.util.onMainMouseButtonClick(evt, () => {
-        window.card.createCards(object);
+        window.card.render(object);
       });
     };
 
     const onKeyClick = (evt) => {
       window.util.onEnterKeyPress(evt, () => {
-        window.card.createCards(object);
+        window.card.render(object);
       });
     };
 

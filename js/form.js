@@ -7,7 +7,6 @@
     3: [`1`, `2`, `3`],
     100: [`0`]
   };
-
   const MIN_TITLE_SYMBOL_LENGTH = 30;
 
   const adNode = document.querySelector(`.ad-form`);
@@ -26,36 +25,39 @@
 
   const validateTitleInput = () => {
     const valueLength = adNode.title.value.length;
-
-    if (valueLength < MIN_TITLE_SYMBOL_LENGTH) {
-      adNode.title.setCustomValidity(`Еще ${MIN_TITLE_SYMBOL_LENGTH - valueLength} символов!`);
-    } else {
-      adNode.title.setCustomValidity(``);
-    }
+    adNode.title = (valueLength < MIN_TITLE_SYMBOL_LENGTH) ? adNode.title.setCustomValidity(`Еще ${MIN_TITLE_SYMBOL_LENGTH - valueLength} символов!`) : adNode.title.setCustomValidity(``);
 
     adNode.title.reportValidity();
   };
 
   const validateTypeInput = (evt) => {
+    const BUNGALOW_MIN_PRICE = 0;
+    const FLAT_MIN_PRICE = 1000;
+    const HOUSE_MIN_PRICE = 5000;
+    const PALACE_MIN_PRICE = 10000;
+
+    const BuildingPrice = {
+      bungalow: BUNGALOW_MIN_PRICE,
+      flat: FLAT_MIN_PRICE,
+      house: HOUSE_MIN_PRICE,
+      palace: PALACE_MIN_PRICE
+    };
+
     switch (evt.target.value) {
       case `bungalow`:
-        adNode.price.min = `0`;
-        adNode.price.max = `999`;
-        adNode.price.placeholder = `От 0 до 999`;
+        adNode.price.min = BuildingPrice.bungalow;
+        adNode.price.placeholder = `От 0 до 1000`;
         break;
       case `flat`:
-        adNode.price.min = 1000;
-        adNode.price.max = 4999;
-        adNode.price.placeholder = `От 1000 до 4999`;
+        adNode.price.min = BuildingPrice.flat;
+        adNode.price.placeholder = `От 1000 до 5000`;
         break;
       case `house`:
-        adNode.price.min = 5000;
-        adNode.price.max = 9999;
-        adNode.price.placeholder = `От 5000 до 9999`;
+        adNode.price.min = BuildingPrice.house;
+        adNode.price.placeholder = `От 5000 до 10000`;
         break;
       case `palace`:
-        adNode.price.min = 10000;
-        adNode.price.max = 1000000;
+        adNode.price.min = BuildingPrice.palace;
         adNode.price.placeholder = `От 10000 до 1000000`;
     }
   };
@@ -65,22 +67,18 @@
   };
 
   const validateTimeInput = (evt) => {
-    for (let i = 0; i < adNode.timeout.options.length; i++) {
-      adNode.timeout.options[i].disabled = true;
-    }
-
     switch (evt.target.value) {
       case `12:00`:
-        adNode.timeout.options[0].disabled = false;
         adNode.timeout[0].selected = true;
+        adNode.timein[0].selected = true;
         break;
       case `13:00`:
-        adNode.timeout.options[1].disabled = false;
         adNode.timeout[1].selected = true;
+        adNode.timein[1].selected = true;
         break;
       case `14:00`:
-        adNode.timeout.options[2].disabled = false;
         adNode.timeout[2].selected = true;
+        adNode.timein[2].selected = true;
         break;
     }
   };

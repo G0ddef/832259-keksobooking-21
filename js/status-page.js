@@ -18,6 +18,26 @@
     }
   };
 
+  const onFormElementClick = (evt) => {
+    switch (evt.target) {
+      case window.form.adNode.rooms:
+        evt.target.addEventListener(`input`, window.form.validateRoomsInput);
+        break;
+      case window.form.adNode.title:
+        evt.target.addEventListener(`input`, window.form.validateTitleInput);
+        break;
+      case window.form.adNode.type:
+        evt.target.addEventListener(`input`, window.form.validateTypeInput);
+        break;
+      case window.form.adNode.timein:
+        evt.target.addEventListener(`input`, window.form.validateTimeInput);
+        break;
+      case window.form.adNode.timeout:
+        evt.target.addEventListener(`input`, window.form.validateTimeInput);
+        break;
+    }
+  };
+
   const activatePage = (data) => {
     toggleDisabledOnFormNodes();
     window.data.createAds(data);
@@ -26,11 +46,8 @@
     window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
     window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
-    window.form.adNode.rooms.addEventListener(`input`, window.form.validateRoomsInput);
-    window.form.adNode.title.addEventListener(`input`, window.form.validateTitleInput);
-    window.form.adNode.type.addEventListener(`input`, window.form.validateTypeInput);
-    window.form.adNode.timein.addEventListener(`input`, window.form.validateTimeInput);
     window.form.validateAddressInput();
+    window.form.adNode.addEventListener(`click`, onFormElementClick);
   };
 
   const onKeyClick = (evt) => {
