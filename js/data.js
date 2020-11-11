@@ -4,8 +4,6 @@
   const createAds = (ads) => {
     const pinsDataArr = ads;
     const getPinsFragmentNodes = window.pin.getFragment(pinsDataArr);
-    const getCardFragment = window.pin.cardCreate(pinsDataArr[0]);
-    window.pin.mapNode.insertBefore(getCardFragment, window.pin.mapFilterContainer);
     window.pin.mapNode.appendChild(getPinsFragmentNodes);
   };
 

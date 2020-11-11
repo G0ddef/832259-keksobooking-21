@@ -1043,10 +1043,12 @@ fieldset {
   line-height: 18px;
 }
 
+
 .popup__text {
   margin: 0;
   margin-bottom: 10px;
 }
+
 
 .popup__text--price {
   font-size: 22px;
@@ -1062,9 +1064,11 @@ fieldset {
   margin-bottom: 5px;
 }
 
+
 .popup__text--capacity {
   margin-bottom: 0;
 }
+
 
 .popup__features {
   margin: 0;
@@ -1263,4 +1267,13 @@ fieldset {
   text-align: center;
 
   background-color: red;
+}
+
+.popup__title:empty,
+.popup__text:empty,
+.popup__type:empty,
+.popup__features:empty,
+.popup__description:empty,
+.popup__photos:empty {
+  display: none;
 }
