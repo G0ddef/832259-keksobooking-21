@@ -26,6 +26,7 @@
     },
     onMainMouseButtonClick: (evt, action) => {
       if (evt.button === 0) {
+        evt.preventDefault();
         action();
       }
     },
