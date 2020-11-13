@@ -21,19 +21,17 @@
   const onFormElementClick = (evt) => {
     switch (evt.target) {
       case window.form.adNode.rooms:
-        evt.target.addEventListener(`input`, window.form.validateRoomsInput);
+        window.form.validateRoomsInput(evt);
         break;
       case window.form.adNode.title:
-        evt.target.addEventListener(`input`, window.form.validateTitleInput);
+        window.form.validateTitleInput(evt);
         break;
       case window.form.adNode.type:
-        evt.target.addEventListener(`input`, window.form.validateTypeInput);
+        window.form.validateTypeInput(evt);
         break;
       case window.form.adNode.timein:
-        evt.target.addEventListener(`input`, window.form.validateTimeInput);
-        break;
       case window.form.adNode.timeout:
-        evt.target.addEventListener(`input`, window.form.validateTimeInput);
+        window.form.validateTimeInput(evt);
         break;
     }
   };
@@ -41,13 +39,14 @@
   const activatePage = (data) => {
     toggleDisabledOnFormNodes();
     window.data.createAds(data);
+    window.pin.mapMainNode.addEventListener(`mousedown`, window.move.onMouseDown);
     window.pin.mapNode.classList.remove(`map--faded`);
     window.form.adNode.classList.remove(`ad-form--disabled`);
-    window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
     window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
-    window.form.validateAddressInput();
-    window.form.adNode.addEventListener(`click`, onFormElementClick);
+    window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
+    window.form.adNode.address.classList.add(`blocked-form`);
+    window.form.adNode.addEventListener(`change`, onFormElementClick);
   };
 
   const onKeyClick = (evt) => {
@@ -60,6 +59,8 @@
 
   const onButtonClick = (evt) => {
     window.util.onMainMouseButtonClick(evt, () => {
+      evt.preventDefault();
+      window.move.onMouseDown(evt);
       window.load(activatePage, window.data.errorHandler);
       window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
       window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
@@ -70,6 +71,7 @@
     mapNode,
     toggleDisabledOnFormNodes,
     onKeyClick,
-    onButtonClick
+    onButtonClick,
+    activatePage
   };
 })();
