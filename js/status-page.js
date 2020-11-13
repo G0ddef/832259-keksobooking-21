@@ -42,11 +42,32 @@
     window.pin.mapMainNode.addEventListener(`mousedown`, window.move.onMouseDown);
     window.pin.mapNode.classList.remove(`map--faded`);
     window.form.adNode.classList.remove(`ad-form--disabled`);
-    window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
-    window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
     window.form.adNode.address.classList.add(`blocked-form`);
     window.form.adNode.addEventListener(`change`, onFormElementClick);
+  };
+
+  const toggleDefaultPage = () => {
+    const pinsNode = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
+
+    window.pin.mapMainNode.style.left = window.main.DEFAULT_COORDINATES_X;
+    window.pin.mapMainNode.style.top = window.main.DEFAULT_COORDINATES_Y;
+    window.pin.mapNode.classList.add(`map--faded`);
+    window.form.adNode.classList.add(`ad-form--disabled`);
+    window.form.adNode.reset();
+    window.form.mapFiltersNode.reset();
+    window.form.adNode.removeEventListener(`change`, window.statusPage.onFormElementClick);
+    window.statusPage.toggleDisabledOnFormNodes();
+
+    window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
+
+    if (window.pin.mapNode.querySelector(`.map__card`)) {
+      window.pin.mapNode.querySelector(`.map__card`).remove();
+    }
+
+    for (let i = 0; i < pinsNode.length; i++) {
+      pinsNode[i].remove();
+    }
   };
 
   const onKeyClick = (evt) => {
@@ -72,6 +93,8 @@
     toggleDisabledOnFormNodes,
     onKeyClick,
     onButtonClick,
-    activatePage
+    activatePage,
+    onFormElementClick,
+    toggleDefaultPage
   };
 })();

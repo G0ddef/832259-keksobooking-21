@@ -20,6 +20,7 @@
   const adNode = document.querySelector(`.ad-form`);
   const addressCoordinatesNode = document.querySelector(`#address`);
   const mapFiltersNode = document.querySelector(`.map__filters`);
+  const clearButtonNode = adNode.querySelector(`.ad-form__reset`);
 
   const validateRoomsInput = (evt) => {
     const possibleOptionsArr = ROOMS_FOR_GUESTS[evt.target.value];
@@ -33,7 +34,7 @@
 
   const validateTitleInput = () => {
     const valueLength = adNode.title.value.length;
-    adNode.title = valueLength < MIN_TITLE_SYMBOL_LENGTH ? adNode.title.setCustomValidity(`Еще ${MIN_TITLE_SYMBOL_LENGTH - valueLength} символов!`) : adNode.title.setCustomValidity(``);
+    adNode.title.setCustomValidity(valueLength < MIN_TITLE_SYMBOL_LENGTH ? `Еще ${MIN_TITLE_SYMBOL_LENGTH - valueLength} символов!` : ``);
 
     adNode.title.reportValidity();
   };
@@ -51,6 +52,18 @@
       adNode.timein.value = adNode.timeout.value;
     }
   };
+
+  const onButtonClick = (evt) => {
+    window.util.onMainMouseButtonClick(evt, () => {
+      window.statusPage.toggleDefaultPage();
+      window.pin.mapMainNode.addEventListener(`keydown`, window.statusPage.onKeyClick);
+      window.pin.mapMainNode.addEventListener(`mousedown`, window.statusPage.onButtonClick);
+      window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.height / 2);
+    });
+  };
+
+  adNode.addEventListener(`submit`, window.sendFormData.onSubmitClick);
+  clearButtonNode.addEventListener(`mousedown`, onButtonClick);
 
   window.form = {
     adNode,

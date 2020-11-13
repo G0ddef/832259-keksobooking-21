@@ -7,8 +7,8 @@
   };
 
   const MapCoordinates = {
-    minHeight: 130 - (PinSize.height / 2),
-    maxHeight: 630,
+    minHeight: 75 - (PinSize.height / 2),
+    maxHeight: 544,
     minWidth: 0 - (PinSize.width / 2),
     maxWidth: 1200 - (PinSize.width / 2)
   };
