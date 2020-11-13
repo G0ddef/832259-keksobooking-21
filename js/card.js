@@ -68,8 +68,8 @@
     const getCardFragment = window.card.create(cardDataArr);
     window.pin.mapNode.insertBefore(getCardFragment, window.pin.mapFilterContainer);
 
-    const cardCloseButton = window.pin.mapNode.querySelector(`.popup__close`);
-    cardCloseButton.addEventListener(`mousedown`, onButtonClick);
+    const cardCloseButtonNode = window.pin.mapNode.querySelector(`.popup__close`);
+    cardCloseButtonNode.addEventListener(`mousedown`, onButtonClick);
     document.addEventListener(`keydown`, onKeyClick);
   };
 
