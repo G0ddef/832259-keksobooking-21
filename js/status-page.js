@@ -47,7 +47,7 @@
     window.form.adNode.addEventListener(`change`, onFormElementClick);
   };
 
-  const toggleDefaultPage = () => {
+  const resetPage = () => {
     const pinsNode = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
 
     window.pin.mapMainNode.style.left = window.main.DEFAULT_COORDINATES_X;
@@ -95,6 +95,6 @@
     onButtonClick,
     activatePage,
     onFormElementClick,
-    toggleDefaultPage
+    resetPage
   };
 })();

@@ -3,8 +3,8 @@
 (() => {
   const createAds = (ads) => {
     const pinsDataArr = ads;
-    const getPinsFragmentNodes = window.pin.getFragment(pinsDataArr);
-    window.pin.mapNode.appendChild(getPinsFragmentNodes);
+    window.pinsDataArr = pinsDataArr;
+    window.filters.updatePins();
   };
 
   const errorHandler = (errorMessage) => {

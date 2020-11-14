@@ -28,15 +28,19 @@
     document.removeEventListener(`keydown`, onEscKeyClick);
   };
 
+  const changeMessageStatus = () => {
+    if (mainNode.querySelector(`.success`)) {
+      removeMessage(mainNode.querySelector(`.success`));
+    } else {
+      removeMessage(mainNode.querySelector(`.error`));
+    }
+  };
+
   const onButtonClick = (evt) => {
     window.util.onMainMouseButtonClick(evt, () => {
       evt.preventDefault();
 
-      if (mainNode.querySelector(`.success`)) {
-        removeMessage(mainNode.querySelector(`.success`));
-      } else {
-        removeMessage(mainNode.querySelector(`.error`));
-      }
+      changeMessageStatus();
 
       document.removeEventListener(`mousedown`, onButtonClick);
       document.removeEventListener(`keydown`, onEscKeyClick);
@@ -47,11 +51,7 @@
     window.util.onEscKeyPress(evt, () => {
       evt.preventDefault();
 
-      if (mainNode.querySelector(`.success`)) {
-        removeMessage(mainNode.querySelector(`.success`));
-      } else {
-        removeMessage(mainNode.querySelector(`.error`));
-      }
+      changeMessageStatus();
 
       document.removeEventListener(`mousedown`, onButtonClick);
       document.removeEventListener(`keydown`, onEscKeyClick);
@@ -60,7 +60,7 @@
 
   const onSubmitClick = (evt) => {
     window.upload(new FormData(window.form.adNode), () => {
-      window.statusPage.toggleDefaultPage();
+      window.statusPage.resetPage();
       window.statusPage.toggleDisabledOnFormNodes();
       window.pin.mapMainNode.addEventListener(`keydown`, window.statusPage.onKeyClick);
       window.pin.mapMainNode.addEventListener(`mousedown`, window.statusPage.onButtonClick);
