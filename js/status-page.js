@@ -55,6 +55,7 @@
     window.pin.mapNode.classList.add(`map--faded`);
     window.form.adNode.classList.add(`ad-form--disabled`);
     window.form.adNode.reset();
+    window.form.adNode.price.placeholder = `1000`;
     window.form.mapFiltersNode.reset();
     window.form.adNode.removeEventListener(`change`, window.statusPage.onFormElementClick);
     window.statusPage.toggleDisabledOnFormNodes();
