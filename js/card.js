@@ -88,13 +88,16 @@
   };
 
   const removeCard = () => {
-    window.pin.mapNode.querySelector(`.map__card`).remove();
-    document.removeEventListener(`keydown`, onKeyClick);
+    if (window.pin.mapNode.querySelector(`.map__card`)) {
+      window.pin.mapNode.querySelector(`.map__card`).remove();
+      document.removeEventListener(`keydown`, onKeyClick);
+    }
   };
 
 
   window.card = {
     create,
-    render
+    render,
+    removeCard
   };
 })();

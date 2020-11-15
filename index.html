@@ -118,7 +118,7 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="1000" min="0" required>
+          <input id="price" name="price" type="number" placeholder="1000" min="1000" max="5000" required>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
@@ -250,6 +250,8 @@
   <script src = "js/load.js"></script>
   <script src = "js/upload.js"></script>
   <script src = "js/pin.js"></script>
+  <script src = "js/debounce.js"></script>
+  <script src = "js/filters.js"></script>
   <script src = "js/status-page.js"></script>
   <script src = "js/send-form-data.js"></script>
   <script src = "js/form.js"></script>
