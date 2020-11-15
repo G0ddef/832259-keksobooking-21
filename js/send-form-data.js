@@ -28,19 +28,15 @@
     document.removeEventListener(`keydown`, onEscKeyClick);
   };
 
-  const changeMessageStatus = () => {
-    if (mainNode.querySelector(`.success`)) {
-      removeMessage(mainNode.querySelector(`.success`));
-    } else {
-      removeMessage(mainNode.querySelector(`.error`));
-    }
+  const removeMessageStatus = () => {
+    removeMessage(mainNode.querySelector(`.success, .error`));
   };
 
   const onButtonClick = (evt) => {
     window.util.onMainMouseButtonClick(evt, () => {
       evt.preventDefault();
 
-      changeMessageStatus();
+      removeMessageStatus();
 
       document.removeEventListener(`mousedown`, onButtonClick);
       document.removeEventListener(`keydown`, onEscKeyClick);
@@ -51,7 +47,7 @@
     window.util.onEscKeyPress(evt, () => {
       evt.preventDefault();
 
-      changeMessageStatus();
+      removeMessageStatus();
 
       document.removeEventListener(`mousedown`, onButtonClick);
       document.removeEventListener(`keydown`, onEscKeyClick);

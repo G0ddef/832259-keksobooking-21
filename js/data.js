@@ -8,9 +8,9 @@
   };
 
   const errorHandler = (errorMessage) => {
-    const errorNode = document.querySelector('.error-handler');
+    const errorNode = document.querySelector(`.error-handler`);
     errorNode.textContent = errorMessage;
-    errorNode.classList.remove('visually-hidden');
+    errorNode.classList.remove(`visually-hidden`);
   };
 
   window.data = {

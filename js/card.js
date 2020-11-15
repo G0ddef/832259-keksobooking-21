@@ -8,7 +8,7 @@
     palace: `Дворец`
   };
 
-  const cardNode = document.querySelector(`#card`).content.querySelector('.map__card');
+  const cardNode = document.querySelector(`#card`).content.querySelector(`.map__card`);
 
   const create = (object) => {
     const cardTemplate = cardNode.cloneNode(true);
@@ -19,10 +19,20 @@
     cardTemplate.querySelector(`.popup__title`).textContent = object.offer.title;
     cardTemplate.querySelector(`.popup__type`).textContent = HouseType[object.offer.type];
     cardTemplate.querySelector(`.popup__text--price`).textContent = object.offer.price ? `${object.offer.price}₽/ночь` : ``;
-    cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комнаты для ${object.offer.guests} гостей` : ``;
     cardTemplate.querySelector(`.popup__text--time`).textContent = object.offer.checkin ? `Заезд после ${object.offer.checkin}, выезд до ${object.offer.checkout}` : ``;
     cardTemplate.querySelector(`.popup__text--address`).textContent = object.offer.address;
     cardTemplate.querySelector(`.popup__description`).textContent = object.offer.description;
+
+    if (object.offer.rooms > 1 && object.offer.rooms < 5) {
+      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комнаты для ${object.offer.guests} гостей` : ``;
+    } else if (object.offer.rooms === 1) {
+      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комната для ${object.offer.guests} гостей` : ``;
+      if (object.offer.guests === 1) {
+        cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комната для ${object.offer.guests} гостя` : ``;
+      }
+    } else if (object.offer.type === 35) {
+      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комнат для ${object.offer.guests} гостей` : ``;
+    }
 
     if (!object.offer.features.length) {
       cardTemplate.removeChild(cardFeatures);
