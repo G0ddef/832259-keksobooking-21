@@ -4,6 +4,7 @@
   const createAds = (ads) => {
     const pinsDataArr = ads;
     window.pinsDataArr = pinsDataArr;
+
     window.filters.updatePins();
   };
 

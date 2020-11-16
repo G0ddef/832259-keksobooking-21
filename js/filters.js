@@ -12,6 +12,46 @@
   const adRoomsFilterNode = document.querySelector(`#housing-rooms`);
   const adGuestsFilterNode = document.querySelector(`#housing-guests`);
 
+  const filterByType = (object) => {
+    return adTypeFilterNode.value === `any` || adTypeFilterNode.value === object.offer.type;
+  };
+
+  const filterByPrice = (object) => {
+    let price = true;
+
+    if (adPriceFilterNode.value === `any`) {
+      price = price;
+    } else if (adPriceFilterNode.value === `middle`) {
+      price = object.offer.price > PRICE.middle && object.offer.price < PRICE.high;
+    } else if (adPriceFilterNode.value === `low`) {
+      price = object.offer.price <= PRICE.middle;
+    } else if (adPriceFilterNode.value === `high`) {
+      price = object.offer.price >= 50000;
+    }
+
+    return price;
+  };
+
+  const filterByFeatures = (object) => {
+    const filterActiveCheckboxes = document.querySelectorAll(`.map__checkbox:checked`);
+
+    for (let i = 0; i < filterActiveCheckboxes.length; i++) {
+      if (!object.offer.features.includes(filterActiveCheckboxes[i].value)) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  const filterByRooms = (object) => {
+    return adRoomsFilterNode.value === `any` || parseInt(adRoomsFilterNode.value, 10) === object.offer.rooms;
+  };
+
+  const filterByGuests = (object) => {
+    return adGuestsFilterNode.value === `any` || parseInt(adGuestsFilterNode.value, 10) === object.offer.guests;
+  };
+
   const updatePins = () => {
     const pinsNode = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
 
@@ -19,55 +59,13 @@
       pinsNode[i].remove();
     }
 
-    const filteredByType = (object) => {
-      return adTypeFilterNode.value === `any` || adTypeFilterNode.value === object.offer.type;
-    };
-
-    const filteredByPrice = (object) => {
-      if (adPriceFilterNode.value !== `any`) {
-        if (adPriceFilterNode.value === `low` && object.offer.price >= PRICE.middle) {
-          return false;
-        }
-
-        if (adPriceFilterNode.value === `middle` && object.offer.price < PRICE.middle && object.offer.price > PRICE.high) {
-          return false;
-        }
-
-        if (adPriceFilterNode.value === `high` && object.offer.price < PRICE.high) {
-          return false;
-        }
-      }
-
-      return true;
-    };
-
-    const filteredByFeatures = (object) => {
-      const filterActiveCheckboxes = document.querySelectorAll(`.map__checkbox:checked`);
-
-      for (let i = 0; i < filterActiveCheckboxes.length; i++) {
-        if (!object.offer.features.includes(filterActiveCheckboxes[i].value)) {
-          return false;
-        }
-      }
-
-      return true;
-    };
-
-    const filteredByRooms = (object) => {
-      return adRoomsFilterNode.value === `any` || parseInt(adRoomsFilterNode.value, 10) === object.offer.rooms;
-    };
-
-    const filteredByGuests = (object) => {
-      return adGuestsFilterNode.value === `any` || parseInt(adGuestsFilterNode.value, 10) === object.offer.guests;
-    };
-
-    const filteredAds = (object) => {
-      return filteredByType(object) && filteredByRooms(object) && filteredByGuests(object) && filteredByPrice(object) && filteredByFeatures(object);
-    };
-
-    const filteredAdsArr = window.pinsDataArr.filter((filteredAds));
-
-    const adsArr = filteredAdsArr.slice(0, PINS_COUNT);
+    const adsArr = window.pinsDataArr
+      .filter(filterByType)
+      .filter(filterByPrice)
+      .filter(filterByFeatures)
+      .filter(filterByRooms)
+      .filter(filterByGuests)
+      .slice(0, PINS_COUNT);
 
     window.card.removeCard();
     window.pin.getFragment(adsArr);

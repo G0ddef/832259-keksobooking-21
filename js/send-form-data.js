@@ -28,7 +28,7 @@
     document.removeEventListener(`keydown`, onEscKeyClick);
   };
 
-  const removeMessageStatus = () => {
+  const removeStatusMessage = () => {
     removeMessage(mainNode.querySelector(`.success, .error`));
   };
 
@@ -36,7 +36,7 @@
     window.util.onMainMouseButtonClick(evt, () => {
       evt.preventDefault();
 
-      removeMessageStatus();
+      removeStatusMessage();
 
       document.removeEventListener(`mousedown`, onButtonClick);
       document.removeEventListener(`keydown`, onEscKeyClick);
@@ -47,7 +47,7 @@
     window.util.onEscKeyPress(evt, () => {
       evt.preventDefault();
 
-      removeMessageStatus();
+      removeStatusMessage();
 
       document.removeEventListener(`mousedown`, onButtonClick);
       document.removeEventListener(`keydown`, onEscKeyClick);

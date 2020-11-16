@@ -5,7 +5,7 @@
     height: 70,
     width: 50
   };
-
+  const mapPin = document.querySelector(`.map__pin`);
   const mapNode = document.querySelector(`.map`);
   const mapFilterContainer = mapNode.querySelector(`.map__filters-container`);
   const mapPinNode = document.querySelector(`#pin`).content.querySelector(`.map__pin`);
@@ -22,12 +22,22 @@
 
     const onButtonClick = (evt) => {
       window.util.onMainMouseButtonClick(evt, () => {
+        if (mapNode.querySelector(`.map__pin--active`)) {
+          mapNode.querySelector(`.map__pin--active`).classList.remove(`map__pin--active`);
+        }
+        evt.target.closest(`.map__pin`).classList.add(`map__pin--active`);
+
         window.card.render(object);
       });
     };
 
     const onKeyClick = (evt) => {
       window.util.onEnterKeyPress(evt, () => {
+        if (mapNode.querySelector(`.map__pin--active`)) {
+          mapNode.querySelector(`.map__pin--active`).classList.remove(`map__pin--active`);
+        }
+        evt.target.closest(`.map__pin`).classList.add(`map__pin--active`);
+
         window.card.render(object);
       });
     };

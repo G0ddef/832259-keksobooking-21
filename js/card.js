@@ -23,15 +23,28 @@
     cardTemplate.querySelector(`.popup__text--address`).textContent = object.offer.address;
     cardTemplate.querySelector(`.popup__description`).textContent = object.offer.description;
 
+    let writeRoom;
+    let writeGuest;
+
     if (object.offer.rooms > 1 && object.offer.rooms < 5) {
-      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комнаты для ${object.offer.guests} гостей` : ``;
+      writeRoom = `комнаты`;
     } else if (object.offer.rooms === 1) {
-      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комната для ${object.offer.guests} гостей` : ``;
+      writeRoom = `комната`
       if (object.offer.guests === 1) {
-        cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комната для ${object.offer.guests} гостя` : ``;
+        writeGuest = `гостя`
       }
-    } else if (object.offer.type === 35) {
-      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} комнат для ${object.offer.guests} гостей` : ``;
+    } else if (object.offer.rooms === 35) {
+      writeRoom = `комнат`
+    }
+
+    if (object.offer.guests >= 2) {
+      writeGuest = `гостей`
+    }
+
+    if (String(object.offer.rooms) === `0`) {
+      cardTemplate.querySelector(`.popup__text--capacity`).textContent = `0 комнат не для гостей`;
+    } else {
+      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} ${writeRoom} для ${object.offer.guests} ${writeGuest}` : ``;
     }
 
     if (!object.offer.features.length) {
@@ -101,6 +114,10 @@
     if (window.pin.mapNode.querySelector(`.map__card`)) {
       window.pin.mapNode.querySelector(`.map__card`).remove();
       document.removeEventListener(`keydown`, onKeyClick);
+    }
+
+    if (window.pin.mapNode.querySelector(`.map__pin--active`)) {
+      window.pin.mapNode.classList.remove(`map__pin--active`)
     }
   };
 
