@@ -12,9 +12,9 @@
 
   const create = (object) => {
     const cardTemplate = cardNode.cloneNode(true);
-    const cardAvatar = cardTemplate.querySelector(`.popup__avatar`);
-    const cardFeatures = cardTemplate.querySelector(`.popup__features`);
-    const cardPhotos = cardTemplate.querySelector(`.popup__photos`);
+    const cardAvatarNode = cardTemplate.querySelector(`.popup__avatar`);
+    const cardFeaturesNode = cardTemplate.querySelector(`.popup__features`);
+    const cardPhotoNode = cardTemplate.querySelector(`.popup__photos`);
 
     cardTemplate.querySelector(`.popup__title`).textContent = object.offer.title;
     cardTemplate.querySelector(`.popup__type`).textContent = HouseType[object.offer.type];
@@ -48,35 +48,35 @@
     }
 
     if (!object.offer.features.length) {
-      cardTemplate.removeChild(cardFeatures);
+      cardTemplate.removeChild(cardFeaturesNode);
     } else {
-      const cardFeaturesList = cardFeatures.querySelector(`.popup__feature`);
-      cardFeaturesList.classList.add(`popup__feature--${object.offer.features[0]}`);
+      const cardFeaturesNodeList = cardFeaturesNode.querySelector(`.popup__feature`);
+      cardFeaturesNodeList.classList.add(`popup__feature--${object.offer.features[0]}`);
 
       for (let i = 1; i < object.offer.features.length; i++) {
-        const newFeature = cardFeaturesList.cloneNode(true);
+        const newFeature = cardFeaturesNodeList.cloneNode(true);
         newFeature.classList.add(`popup__feature--${object.offer.features[i]}`);
-        cardFeatures.appendChild(newFeature);
+        cardFeaturesNode.appendChild(newFeature);
       }
     }
 
     if (!object.offer.photos.length) {
-      cardTemplate.removeChild(cardPhotos);
+      cardTemplate.removeChild(cardPhotoNode);
     } else {
-      const imgList = cardPhotos.querySelector(`img`);
+      const imgList = cardPhotoNode.querySelector(`img`);
       imgList.src = object.offer.photos[0];
 
       for (let i = 1; i < object.offer.photos.length; i++) {
         const newPhoto = imgList.cloneNode(true);
         newPhoto.src = object.offer.photos[i];
-        cardPhotos.appendChild(newPhoto);
+        cardPhotoNode.appendChild(newPhoto);
       }
     }
 
     if (!object.author.avatar) {
-      cardTemplate.removeChild(cardAvatar);
+      cardTemplate.removeChild(cardAvatarNode);
     } else {
-      cardAvatar.src = object.author.avatar;
+      cardAvatarNode.src = object.author.avatar;
     }
 
     return cardTemplate;
