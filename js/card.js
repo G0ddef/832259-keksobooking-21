@@ -23,28 +23,28 @@
     cardTemplate.querySelector(`.popup__text--address`).textContent = object.offer.address;
     cardTemplate.querySelector(`.popup__description`).textContent = object.offer.description;
 
-    let writeRoom;
-    let writeGuest;
+    let roomDeclensionValue;
+    let guestDeclensionValue;
 
     if (object.offer.rooms > 1 && object.offer.rooms < 5) {
-      writeRoom = `комнаты`;
+      roomDeclensionValue = `комнаты`;
     } else if (object.offer.rooms === 1) {
-      writeRoom = `комната`;
+      roomDeclensionValue = `комната`;
       if (object.offer.guests === 1) {
-        writeGuest = `гостя`;
+        guestDeclensionValue = `гостя`;
       }
     } else if (object.offer.rooms === 35) {
-      writeRoom = `комнат`;
+      roomDeclensionValue = `комнат`;
     }
 
     if (object.offer.guests >= 2) {
-      writeGuest = `гостей`;
+      guestDeclensionValue = `гостей`;
     }
 
     if (String(object.offer.rooms) === `0`) {
       cardTemplate.querySelector(`.popup__text--capacity`).textContent = `0 комнат не для гостей`;
     } else {
-      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} ${writeRoom} для ${object.offer.guests} ${writeGuest}` : ``;
+      cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} ${roomDeclensionValue} для ${object.offer.guests} ${guestDeclensionValue}` : ``;
     }
 
     if (!object.offer.features.length) {
