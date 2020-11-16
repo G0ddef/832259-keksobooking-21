@@ -2,7 +2,7 @@
 
 (() => {
   const PINS_COUNT = 5;
-  const PRICE = {
+  const Price = {
     middle: 10000,
     high: 50000
   };
@@ -22,9 +22,9 @@
     if (adPriceFilterNode.value === `any`) {
       price = price;
     } else if (adPriceFilterNode.value === `middle`) {
-      price = object.offer.price > PRICE.middle && object.offer.price < PRICE.high;
+      price = object.offer.price > Price.middle && object.offer.price < Price.high;
     } else if (adPriceFilterNode.value === `low`) {
-      price = object.offer.price <= PRICE.middle;
+      price = object.offer.price <= Price.middle;
     } else if (adPriceFilterNode.value === `high`) {
       price = object.offer.price >= 50000;
     }
@@ -72,7 +72,7 @@
   };
 
 
-  const onFilterChange = window.debounce(() => {
+  const onFilterChange = window.util.debounce(() => {
     updatePins();
   });
 
