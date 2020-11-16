@@ -5,7 +5,7 @@
     height: 70,
     width: 50
   };
-  const mapPin = document.querySelector(`.map__pin`);
+
   const mapNode = document.querySelector(`.map`);
   const mapFilterContainer = mapNode.querySelector(`.map__filters-container`);
   const mapPinNode = document.querySelector(`#pin`).content.querySelector(`.map__pin`);

@@ -29,16 +29,16 @@
     if (object.offer.rooms > 1 && object.offer.rooms < 5) {
       writeRoom = `комнаты`;
     } else if (object.offer.rooms === 1) {
-      writeRoom = `комната`
+      writeRoom = `комната`;
       if (object.offer.guests === 1) {
-        writeGuest = `гостя`
+        writeGuest = `гостя`;
       }
     } else if (object.offer.rooms === 35) {
-      writeRoom = `комнат`
+      writeRoom = `комнат`;
     }
 
     if (object.offer.guests >= 2) {
-      writeGuest = `гостей`
+      writeGuest = `гостей`;
     }
 
     if (String(object.offer.rooms) === `0`) {
@@ -117,7 +117,7 @@
     }
 
     if (window.pin.mapNode.querySelector(`.map__pin--active`)) {
-      window.pin.mapNode.classList.remove(`map__pin--active`)
+      window.pin.mapNode.classList.remove(`map__pin--active`);
     }
   };
 
