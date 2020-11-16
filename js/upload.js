@@ -25,7 +25,7 @@
       window.sendFormData.renderErrorMessage();
     });
 
-    xhr.addEventListener('timeout', () => {
+    xhr.addEventListener(`timeout`, () => {
       window.sendFormData.renderErrorMessage();
     });
 
