@@ -1,19 +1,18 @@
 'use strict';
 
 (() => {
-  const HouseType = {
-    flat: `Квартира`,
-    bungalow: `Бунгало`,
-    house: `Дом`,
-    palace: `Дворец`
-  };
-
   const ONE_ROOM_VALUE = 1;
   const FIVE_ROOMS_VALUE = 5;
   const THIRTY_FIVE_ROOMS_VALUE = 35;
   const ZERO_ROOM_VALUE = `0`;
   const TWO_GUESTS_VALUE = 2;
 
+  const HouseType = {
+    flat: `Квартира`,
+    bungalow: `Бунгало`,
+    house: `Дом`,
+    palace: `Дворец`
+  };
 
   const cardNode = document.querySelector(`#card`).content.querySelector(`.map__card`);
 
