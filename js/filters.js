@@ -53,10 +53,10 @@
   };
 
   const updatePins = () => {
-    const pinsNode = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
+    const pinsNodes = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
 
-    for (let i = 0; i < pinsNode.length; i++) {
-      pinsNode[i].remove();
+    for (let i = 0; i < pinsNodes.length; i++) {
+      pinsNodes[i].remove();
     }
 
     const adsArr = window.pinsDataArr

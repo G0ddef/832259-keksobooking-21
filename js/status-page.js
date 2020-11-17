@@ -45,11 +45,13 @@
     window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.activeHeight);
     window.form.adNode.address.classList.add(`blocked-form`);
     window.form.adNode.addEventListener(`change`, onFormElementClick);
+    window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
+    window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
   };
 
   const resetPage = () => {
-    const pinsNode = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
-
+    const pinsNodes = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
+    window.pin.mapMainNode.removeEventListener(`mousedown`, window.move.onMouseDown);
     window.pin.mapMainNode.style.left = window.main.DEFAULT_COORDINATES_X;
     window.pin.mapMainNode.style.top = window.main.DEFAULT_COORDINATES_Y;
     window.pin.mapNode.classList.add(`map--faded`);
@@ -66,16 +68,14 @@
       window.pin.mapNode.querySelector(`.map__card`).remove();
     }
 
-    for (let i = 0; i < pinsNode.length; i++) {
-      pinsNode[i].remove();
+    for (let i = 0; i < pinsNodes.length; i++) {
+      pinsNodes[i].remove();
     }
   };
 
   const onKeyClick = (evt) => {
     window.util.onEnterKeyPress(evt, () => {
       window.load(activatePage, window.data.errorHandler);
-      window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
-      window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     });
   };
 
@@ -84,8 +84,6 @@
       evt.preventDefault();
       window.move.onMouseDown(evt);
       window.load(activatePage, window.data.errorHandler);
-      window.pin.mapMainNode.removeEventListener(`mousedown`, onButtonClick);
-      window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
     });
   };
 
