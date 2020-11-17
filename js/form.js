@@ -16,13 +16,6 @@
     palace: 10000
   };
 
-  const MaxBuildingPrices = {
-    bungalow: 1000,
-    flat: 5000,
-    house: 10000,
-    palace: 1000000
-  };
-
   const adNode = document.querySelector(`.ad-form`);
   const addressCoordinatesNode = document.querySelector(`#address`);
   const mapFiltersNode = document.querySelector(`.map__filters`);
@@ -47,9 +40,7 @@
 
   const validateTypeInput = (evt) => {
     const minPrice = MinBuildingPrices[evt.target.value];
-    const maxPrice = MaxBuildingPrices[evt.target.value];
     adNode.price.min = minPrice;
-    adNode.price.max = maxPrice;
     adNode.price.placeholder = minPrice;
   };
 
@@ -63,7 +54,7 @@
 
   const onButtonClick = (evt) => {
     window.util.onMainMouseButtonClick(evt, () => {
-      window.statusPage.resetPage();
+      window.statusPage.reset();
       window.pin.mapMainNode.addEventListener(`keydown`, window.statusPage.onKeyClick);
       window.pin.mapMainNode.addEventListener(`mousedown`, window.statusPage.onButtonClick);
       window.util.renderAddressCoordinates(window.util.MainPinSize.width / 2, window.util.MainPinSize.height / 2);

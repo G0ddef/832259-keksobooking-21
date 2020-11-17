@@ -36,7 +36,7 @@
     }
   };
 
-  const activatePage = (data) => {
+  const activate = (data) => {
     toggleDisabledOnFormNodes();
     window.data.createAds(data);
     window.pin.mapMainNode.addEventListener(`mousedown`, window.move.onMouseDown);
@@ -49,7 +49,7 @@
     window.pin.mapMainNode.removeEventListener(`keydown`, onKeyClick);
   };
 
-  const resetPage = () => {
+  const reset = () => {
     const pinsNodes = window.pin.mapNode.querySelectorAll(`.map__pin:not(.map__pin--main)`);
     window.pin.mapMainNode.removeEventListener(`mousedown`, window.move.onMouseDown);
     window.pin.mapMainNode.style.left = window.main.DEFAULT_COORDINATES_X;
@@ -75,7 +75,7 @@
 
   const onKeyClick = (evt) => {
     window.util.onEnterKeyPress(evt, () => {
-      window.load(activatePage, window.data.errorHandler);
+      window.load(activate, window.data.errorHandler);
     });
   };
 
@@ -83,7 +83,7 @@
     window.util.onMainMouseButtonClick(evt, () => {
       evt.preventDefault();
       window.move.onMouseDown(evt);
-      window.load(activatePage, window.data.errorHandler);
+      window.load(activate, window.data.errorHandler);
     });
   };
 
@@ -92,8 +92,7 @@
     toggleDisabledOnFormNodes,
     onKeyClick,
     onButtonClick,
-    activatePage,
     onFormElementClick,
-    resetPage
+    reset
   };
 })();

@@ -13,7 +13,7 @@
 
     xhr.addEventListener(`load`, () => {
       if (xhr.status === StatusCode.OK) {
-        window.statusPage.resetPage();
+        window.statusPage.reset();
         window.sendFormData.renderSuccessMessage();
         onSucces(xhr.response);
       } else {

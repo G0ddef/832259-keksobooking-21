@@ -8,6 +8,13 @@
     palace: `Дворец`
   };
 
+  const ONE_ROOM_VALUE = 1;
+  const FIVE_ROOMS_VALUE = 5;
+  const THIRTY_FIVE_ROOMS_VALUE = 35;
+  const ZERO_ROOM_VALUE = `0`;
+  const TWO_GUESTS_VALUE = 2;
+
+
   const cardNode = document.querySelector(`#card`).content.querySelector(`.map__card`);
 
   const create = (object) => {
@@ -26,22 +33,22 @@
     let roomDeclensionValue;
     let guestDeclensionValue;
 
-    if (object.offer.rooms > 1 && object.offer.rooms < 5) {
+    if (object.offer.rooms > ONE_ROOM_VALUE && object.offer.rooms < FIVE_ROOMS_VALUE) {
       roomDeclensionValue = `комнаты`;
-    } else if (object.offer.rooms === 1) {
+    } else if (object.offer.rooms === ONE_ROOM_VALUE) {
       roomDeclensionValue = `комната`;
-      if (object.offer.guests === 1) {
+      if (object.offer.guests === ONE_ROOM_VALUE) {
         guestDeclensionValue = `гостя`;
       }
-    } else if (object.offer.rooms === 35) {
+    } else if (object.offer.rooms === THIRTY_FIVE_ROOMS_VALUE) {
       roomDeclensionValue = `комнат`;
     }
 
-    if (object.offer.guests >= 2) {
+    if (object.offer.guests >= TWO_GUESTS_VALUE) {
       guestDeclensionValue = `гостей`;
     }
 
-    if (String(object.offer.rooms) === `0`) {
+    if (String(object.offer.rooms) === ZERO_ROOM_VALUE) {
       cardTemplate.querySelector(`.popup__text--capacity`).textContent = `0 комнат не для гостей`;
     } else {
       cardTemplate.querySelector(`.popup__text--capacity`).textContent = object.offer.rooms && object.offer.guests ? `${object.offer.rooms} ${roomDeclensionValue} для ${object.offer.guests} ${guestDeclensionValue}` : ``;
@@ -99,18 +106,18 @@
   const onButtonClick = (evt) => {
     window.util.onMainMouseButtonClick(evt, () => {
       evt.preventDefault();
-      removeCard();
+      remove();
     });
   };
 
   const onKeyClick = (evt) => {
     window.util.onEscKeyPress(evt, () => {
       evt.preventDefault();
-      removeCard();
+      remove();
     });
   };
 
-  const removeCard = () => {
+  const remove = () => {
     if (window.pin.mapNode.querySelector(`.map__card`)) {
       window.pin.mapNode.querySelector(`.map__card`).remove();
       document.removeEventListener(`keydown`, onKeyClick);
@@ -125,6 +132,6 @@
   window.card = {
     create,
     render,
-    removeCard
+    remove
   };
 })();

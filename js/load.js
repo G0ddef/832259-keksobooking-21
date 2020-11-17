@@ -3,6 +3,7 @@
 (() => {
   const URL = `https://21.javascript.pages.academy/keksobooking/data`;
   const TIMEOUT_IN_MS = 10000;
+  const timeoutInSec = 1000;
   const StatusCode = {
     OK: 200
   };
@@ -23,7 +24,7 @@
       onError(`Ошибка загрузки! Перезагрузите страницу!`);
     });
     xhr.addEventListener(`timeout`, () => {
-      onError(`Запрос не успел выполниться за ${xhr.timeout / 1000} сек. Статус ответа: ${xhr.status} ${xhr.statusText}. Попробуйте перезагрузить страницу!`);
+      onError(`Запрос не успел выполниться за ${xhr.timeout / timeoutInSec} сек. Статус ответа: ${xhr.status} ${xhr.statusText}. Попробуйте перезагрузить страницу!`);
     });
 
     xhr.timeout = TIMEOUT_IN_MS;

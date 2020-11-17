@@ -56,7 +56,7 @@
 
   const onSubmitClick = (evt) => {
     window.upload(new FormData(window.form.adNode), () => {
-      window.statusPage.resetPage();
+      window.statusPage.reset();
       window.statusPage.toggleDisabledOnFormNodes();
       window.pin.mapMainNode.addEventListener(`keydown`, window.statusPage.onKeyClick);
       window.pin.mapMainNode.addEventListener(`mousedown`, window.statusPage.onButtonClick);

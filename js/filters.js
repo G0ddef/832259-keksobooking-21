@@ -26,7 +26,7 @@
     } else if (adPriceFilterNode.value === `low`) {
       price = object.offer.price <= Price.middle;
     } else if (adPriceFilterNode.value === `high`) {
-      price = object.offer.price >= 50000;
+      price = object.offer.price >= Price.high;
     }
 
     return price;
@@ -67,7 +67,7 @@
       .filter(filterByGuests)
       .slice(0, PINS_COUNT);
 
-    window.card.removeCard();
+    window.card.remove();
     window.pin.getFragment(adsArr);
   };
 
